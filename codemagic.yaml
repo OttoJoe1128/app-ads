@@ -1,0 +1,16 @@
+workflows:
+  android_release:
+    name: Android Release
+    working_directory: benim_ilk_uygulamam
+    environment:
+      flutter: stable
+    scripts:
+      - name: Bağımlılıkları indir
+        script: flutter pub get
+      - name: AAB üret
+        script: flutter build appbundle --release --build-number=$BUILD_NUMBER
+      - name: APK üret (opsiyonel)
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
+      - build/app/outputs/flutter-apk/*.apk
